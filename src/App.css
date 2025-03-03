@@ -12,6 +12,125 @@
   min-height: 100vh;
 }
 
+.passphrase-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #FFFFFF;
+  min-height: 100vh;
+}
+
+/* PassPhrase.css - Make sure the filename is exactly PassPhrase.css with capital P */
+
+.passphrase-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.passphrase-wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.passphrase-title {
+  font-size: 32px;
+  font-weight: 600;
+  color: #222;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.passphrase-input-container {
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  padding: 0;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.passphrase-textarea-wrapper {
+  height: 180px;
+  padding: 16px;
+}
+
+.passphrase-textarea {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  font-size: 16px;
+  color: #aaa;
+  background: transparent;
+}
+
+.passphrase-button {
+  width: 100%;
+  padding: 16px;
+  border-radius: 16px;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  cursor: pointer;
+  background-color: #fff;
+  color: #673ab7;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.fingerprint-button {
+  width: 100%;
+  padding: 16px;
+  border-radius: 16px;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 24px;
+  cursor: pointer;
+  background-color: #673ab7;
+  color: #fff;
+  border: none;
+  text-align: center;
+}
+
+.disclaimer-text {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.link-text {
+  color: #0088cc;
+  text-decoration: none;
+}
+
+.back-button {
+  width: 100%;
+  padding: 16px;
+  border-radius: 16px;
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 24px;
+  cursor: pointer;
+  background-color: #f5f5f5;
+  color: #333;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
 .header {
   display: flex;
   flex-direction: column;
@@ -134,4 +253,9 @@
 .explore-icon svg {
   width: 100%;
   height: 100%;
+}
+
+.passphrase-title{
+  display: flex;
+  justify-content: center;
 }
