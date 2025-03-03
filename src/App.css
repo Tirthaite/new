@@ -27,12 +27,23 @@
   margin-bottom: 20px;
 }
 
-.blockchain_class{
-  height: 20px;
+.block_classs img {
+  height: 44px;
+}
+.block_classs {
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  border: 1px solid #E0E0E0;
+  background-color: #FFFFFF;
 }
 
 .icon-container img{
-  height: 45px;
+  height: 55px;
 }
 
 .pi-logo img{

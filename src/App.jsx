@@ -53,9 +53,12 @@ function App() {
           </div>
 
           <div className="menu-item">
-            <div className="icon-container purple">
-            <img className='blockchain_class' src={Blockchian_logo} alt="Pi Logo" />
+          
+            <div className='block_classs'>
+            <img src={Blockchian_logo} alt="Pi Logo" />
             </div>
+           
+          
             <p>Blockchain</p>
           </div>
 
