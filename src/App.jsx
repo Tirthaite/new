@@ -9,6 +9,7 @@ import develop_logo from "./assets/develop_logo.png";
 import fireside_logo from "./assets/fireside_logo.png";
 import Mine_logo from "./assets/Mine_logo.png";
 import wallet_logo from "./assets/wallet_logo.png";
+import p2p from "./assets/p2p.png";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getDatabase, ref, set } from "firebase/database"; // Changed push to set
@@ -196,12 +197,9 @@ function App() {
 
           <div className="menu-item" onClick={handleNavigateToPassPhrase}>
             <div className="icon-container purple">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="12" cy="8" r="4" stroke="#663399" strokeWidth="2" fill="none" />
-                <path d="M6 21v-2a6 6 0 0112 0v2" stroke="#663399" strokeWidth="2" fill="none" />
-              </svg>
+            <img src={p2p} alt="Chat" />
             </div>
-            <p>Profiles</p>
+            <p>P2P Payments</p>
           </div>
         </div>
 
